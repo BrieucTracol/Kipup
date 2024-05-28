@@ -4,7 +4,9 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExoDao {
@@ -15,4 +17,10 @@ interface ExoDao {
 
     @Delete
     suspend fun delete(exo: Exo)
+
+    @Query("SELECT * from exos WHERE exoId = :exoId")
+    fun getExo(exoId: Int): Flow<Exo>
+
+    @Query("SELECT * from exos ORDER BY nom ASC")
+    fun getAllExos(): Flow<List<Exo>>
 }

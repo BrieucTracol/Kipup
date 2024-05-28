@@ -7,7 +7,7 @@ import androidx.room.Room
 
 @Database(entities = [Exo::class], version = 1, exportSchema = false)
 abstract class MyDataBase : RoomDatabase() {
-    abstract fun itemDao(): ExoDao
+    abstract fun exoDao(): ExoDao
     //abstract fun seanceDao(): SeanceDao
     //abstract fun serieDao(): SerieDao
 
