@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kipup.composables.MyTopAppBar
 import com.example.kipup.ui.theme.KipupTheme
+import com.example.kipup.Database.MyDataBase
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
     MyTopAppBar()
+    getDataBase()
 }
 
 
