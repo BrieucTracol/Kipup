@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 
 import androidx.compose.ui.Alignment
@@ -20,7 +21,7 @@ import com.example.kipup.ui.theme.Yellow
 
 
 
-
+//bouton de la page principale
 
 @Composable
 fun MainPageButton(modifier: Modifier = Modifier,imageId: Int,onClick: () -> Unit){
@@ -46,9 +47,12 @@ fun MainPageButton(modifier: Modifier = Modifier,imageId: Int,onClick: () -> Uni
            verticalArrangement = Arrangement.Center,
            horizontalAlignment = Alignment.CenterHorizontally
        ) {
-            Image(
+            Icon(
                 painter = painterResource(id = R.drawable.baseline_add_24),
-                contentDescription = "..."
+                contentDescription = "...",
+                tint = Color.White,
+                modifier = Modifier
+                        .size(40.dp)
             )
            Text("Alfred Sisley")
            Text("3 minutes ago")
