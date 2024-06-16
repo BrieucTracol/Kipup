@@ -1,6 +1,8 @@
 package com.example.kipup.Database
 
 import android.content.Context
+import android.util.Log
+
 interface AppContainer {
     val exoRepository: ExoRepository
 }

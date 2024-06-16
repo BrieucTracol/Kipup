@@ -9,20 +9,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.kipup.composables.MainPageButton
-import com.example.kipup.composables.MyTopAppBar
+import com.example.kipup.R
+import com.example.kipup.composables.Ui.Button.MainPageButton
+import com.example.kipup.composables.Ui.MyTopAppBar
+import com.example.kipup.ui.theme.BackGround
 
 
 @Composable
 fun MainPage(modifier: Modifier = Modifier,navController: NavHostController) {
+
+
     Column(
         Modifier
 
-        .background(Color.White)
+        .background(BackGround)
         .fillMaxHeight())
     {
         MyTopAppBar(navController)
@@ -33,8 +35,8 @@ fun MainPage(modifier: Modifier = Modifier,navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceBetween
 
         ){
-            MainPageButton(modifier = Modifier.weight(1f),1,onClick = {navController.navigate("training")})
-            MainPageButton(modifier = Modifier.weight(1f),1,onClick = {navController.navigate("exercise")})
+            MainPageButton(modifier = Modifier.weight(1f),R.drawable.dumbbell_8_svgrepo_com,onClick = {navController.navigate("training")},"seance")
+            MainPageButton(modifier = Modifier.weight(1f),R.drawable.baseline_add_24,onClick = {navController.navigate("exercise")},"exercice")
 
         }
         Row(
@@ -44,8 +46,8 @@ fun MainPage(modifier: Modifier = Modifier,navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceBetween
 
         ){
-            MainPageButton(modifier = Modifier.weight(1f),1,onClick = {navController.navigate("second")})
-            MainPageButton(modifier = Modifier.weight(1f),1,onClick = {navController.navigate("second")})
+            MainPageButton(modifier = Modifier.weight(1f),R.drawable.baseline_add_24,onClick = {navController.navigate("second")},"serie")
+            MainPageButton(modifier = Modifier.weight(1f),R.drawable.baseline_add_24,onClick = {navController.navigate("second")},"")
 
         }
 

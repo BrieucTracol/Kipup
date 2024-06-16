@@ -17,6 +17,6 @@ class InventoryApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppDataContainer(this)
-        Log.i("1","le container est remplie")
+
     }
 }

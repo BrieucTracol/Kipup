@@ -1,4 +1,4 @@
-package com.example.kipup.composables
+package com.example.kipup.composables.Ui.Button
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -19,9 +19,10 @@ fun AddButton(onClick: () -> Unit){//
         Icon(
             painter = painterResource(id = R.drawable.baseline_add_24),
             contentDescription = "...",
-            tint = Color.White,
+            tint = Color.Yellow,
             modifier = Modifier
-                .size(40.dp)
+                .size(60.dp)
+                .fillMaxSize()
 
         )
     }

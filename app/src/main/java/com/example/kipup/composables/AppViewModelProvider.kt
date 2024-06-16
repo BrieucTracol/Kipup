@@ -14,7 +14,7 @@ object AppViewModelProvider {
             ExoEntryViewModel(inventoryApplication().container.exoRepository)
 
         }
-        Log.i("1","ExoEntryViewModel initialiser")
+
     }
 }
 
