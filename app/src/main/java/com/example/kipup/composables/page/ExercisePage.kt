@@ -44,9 +44,9 @@ import com.example.kipup.ui.theme.Yellow
 fun ExercisePage(navController: NavHostController) {
     var showDialog by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
-    val exocards = remember { mutableStateListOf<Exo>() }
+    val exocards = remember { mutableStateListOf<Exo>() } //list d'exo pour combler le manque de BDD
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) {//initialisation de la list avec des exos préfaits pour test
         exocards.addAll(
             listOf(
                 Exo(exoId = 1, nom = "Curl", muscle = "Biceps"),
@@ -76,7 +76,17 @@ fun ExercisePage(navController: NavHostController) {
             ),
             modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp)
         )
-        DropDownMenu()
+
+            DropDownMenu(onValidClick = { triChoisi ->
+                exocards.sortWith(compareBy(
+                    when (triChoisi) {
+                        "Id" -> { exo: Exo -> exo.exoId }
+                        "nom" -> { exo: Exo -> exo.nom }
+                        "muscle" -> { exo: Exo -> exo.muscle }
+                        else -> { exo: Exo -> exo.exoId }
+                    }
+                ))
+            })
         }
         /* Divider(color = BackGround, thickness = 1.dp,
              modifier = Modifier
@@ -114,7 +124,7 @@ fun ExercisePage(navController: NavHostController) {
 
             },
             onDismissRequest = { showDialog = false },
-            showDialog = showDialog, // Passez l'état showDialog à ExoEntryNotif
+            showDialog = showDialog, // Passe l'état showDialog à ExoEntryNotif
             modifier = Modifier
         )
     }
@@ -123,7 +133,7 @@ fun ExercisePage(navController: NavHostController) {
 
 
 @Composable
-fun ExoEntryNotif(
+fun ExoEntryNotif(// composable pop up qui permet de rentrer un exercice
     //exoUiState: ExoUiState,
     //onExoValueChange: (ExoUiState) -> Unit,
     onSaveClick: (String,String) -> Unit,
@@ -158,8 +168,7 @@ fun ExoEntryNotif(
                 Button(
                     onClick = {
                         onSaveClick(val1,val2)
-                        showDialogState.value =
-                            false // Ferme la boîte de dialogue après avoir cliqué sur "Confirmer"
+                        showDialogState.value = false // Ferme la boîte de dialogue après avoir cliqué sur "Confirmer"
                     },
                     //enabled = exoUiState.isEntryValid
                 ) {

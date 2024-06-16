@@ -1,5 +1,6 @@
 package com.example.kipup.composables.Ui.Button
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -33,11 +34,14 @@ import com.example.kipup.ui.theme.BackGround
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDownMenu() {
+fun DropDownMenu(
+    onValidClick: (String) -> Unit,
+) {
     val context = LocalContext.current
     val choixtri = arrayOf("Id", "nom", "muscle")
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(choixtri[0]) }
+
 
     Box(
         modifier = Modifier
@@ -75,6 +79,8 @@ fun DropDownMenu() {
                         text = { Text(text = item) },
                         onClick = {
                             selectedText = item
+                            onValidClick(selectedText)
+                            Log.d("test",item)
                             expanded = false
 
                         },
