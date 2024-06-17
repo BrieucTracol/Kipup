@@ -29,7 +29,7 @@ import com.example.kipup.ui.theme.Yellow
 @Composable
 fun Boutonplusmoins(buttonName: String) { //un bouton pour changer les valeurs de l'exo stocker dans la seance(actuellement il n'y a pas de BDD donc juste change le chiffre afficher
 
-    var valeur by remember { mutableStateOf(0) }
+    var valeur by remember { mutableStateOf(0) } //valeur (non lié a la BDD)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(text= buttonName + ":",
             textAlign = TextAlign.Center,
@@ -55,7 +55,7 @@ fun Boutonplusmoins(buttonName: String) { //un bouton pour changer les valeurs d
 
 
             )
-            IconButton(onClick = { valeur-- }) {
+            IconButton(onClick = { if(valeur>0){valeur-- }}) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_arrow_drop_down_24),
                     contentDescription = "bouton pour reduire la valeur",

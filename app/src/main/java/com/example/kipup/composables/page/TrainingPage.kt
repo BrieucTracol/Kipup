@@ -80,7 +80,6 @@ fun TrainingPage(navController: NavHostController) {
         MyTopAppBar(navController)
         for (exo in exolist) {
             FicheExo(nom = exo.nom, muscle = exo.muscle, timer = 5)
-            ReposTimer()
         }
 
     }
@@ -115,11 +114,16 @@ fun FicheExo(nom: String, muscle: String, timer: Int) {
         }
 
         Divider(
-            color = Yellow, thickness = 1.dp,
+            color = Yellow2, thickness = 1.dp,
             modifier = Modifier
                 .padding(horizontal = 40.dp)
         )
-
+        ReposTimer()
+        Divider(
+            color = Yellow2, thickness = 1.dp,
+            modifier = Modifier
+                .padding(horizontal = 40.dp)
+        )
     }
 }
 
@@ -135,22 +139,23 @@ fun ReposTimer() {
             seconds--
         }
     }
-    Column(){
+    Column(modifier = Modifier
+        .padding(8.dp)){
     Row(horizontalArrangement = Arrangement.SpaceAround) {
         Text(text = "Temps de repos restant: ",
             textDecoration = TextDecoration.Underline,
-            color = Yellow2)
+            color = Yellow)
         Box(
             contentAlignment = Alignment.Center,
         ) {
-            Text(text = "$seconds",
+            Text(text = "$seconds", //on affiche le nombre de secondes restantes
                 color = Color.White,
                 modifier = Modifier.background(Color.DarkGray)
                  )
         }
     }
-        Button(onClick = { isRunning = !isRunning },
-            colors = ButtonDefaults.buttonColors(containerColor = Yellow2) ){
+        Button(onClick = { isRunning = !isRunning }, //a chaque clic on change l'etat du boolean
+            colors = ButtonDefaults.buttonColors(containerColor = Yellow) ){
             Text(text = if (isRunning) "Pause" else "Resume")
         }
 }}
