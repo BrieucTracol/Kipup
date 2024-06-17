@@ -25,6 +25,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -39,16 +41,19 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.kipup.composables.Ui.Button.Boutonplusmoins
 import com.example.kipup.ui.theme.BackGround
 import com.example.kipup.ui.theme.Yellow
+import com.example.kipup.ui.theme.Yellow2
 import kotlinx.coroutines.delay
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
+
 @Composable
 fun TrainingPage(navController: NavHostController) {
     val exolist = remember { mutableStateListOf<Exo>() }
@@ -56,7 +61,13 @@ fun TrainingPage(navController: NavHostController) {
         exolist.addAll(
             listOf(
                 Exo(exoId = 1, nom = "Curl", muscle = "Biceps"),
+                Exo(exoId = 1, nom = "Curl", muscle = "Biceps"),
+                Exo(exoId = 1, nom = "Curl", muscle = "Biceps"),
                 Exo(exoId = 2, nom = "Squat", muscle = "Quadriceps"),
+                Exo(exoId = 2, nom = "Squat", muscle = "Quadriceps"),
+                Exo(exoId = 2, nom = "Squat", muscle = "Quadriceps"),
+                Exo(exoId = 3, nom = "Dips", muscle = "Pectoraux"),
+                Exo(exoId = 3, nom = "Dips", muscle = "Pectoraux"),
                 Exo(exoId = 3, nom = "Dips", muscle = "Pectoraux")
             )
         )
@@ -64,37 +75,82 @@ fun TrainingPage(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         MyTopAppBar(navController)
-        FicheExo(nom = "Curl", muscle = "Biceps", timer = 5)
-        FicheExo(nom = "Curl", muscle = "Biceps", timer = 5)
+        for (exo in exolist) {
+            FicheExo(nom = exo.nom, muscle = exo.muscle, timer = 5)
+            ReposTimer()
+        }
+
     }
 }
 
 
 @Composable
-fun FicheExo(nom: String,muscle: String,timer: Int){
+fun FicheExo(nom: String, muscle: String, timer: Int) {
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(10.dp)){
-        Row(horizontalArrangement = Arrangement.SpaceBetween,
-            modifier= Modifier
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)) {
+                .padding(10.dp)
+        ) {
             Text(text = nom)
             Text(text = muscle)
         }
-        Row(horizontalArrangement = Arrangement.SpaceAround,
-            modifier= Modifier
+        Row(
+            horizontalArrangement = Arrangement.SpaceAround,
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)){
+                .padding(10.dp)
+        ) {
             Boutonplusmoins("Poids")
             Boutonplusmoins("Rep")
         }
 
-        Divider(color = Yellow, thickness = 1.dp,
+        Divider(
+            color = Yellow, thickness = 1.dp,
             modifier = Modifier
-                .padding(horizontal = 40.dp))
+                .padding(horizontal = 40.dp)
+        )
+
     }
 }
+
+@Preview
+@Composable
+fun ReposTimer() {
+    var seconds by remember { mutableStateOf(90) }
+
+    var isRunning by remember { mutableStateOf(false) }
+    LaunchedEffect(isRunning) {
+        while (isRunning && seconds>0) {
+            delay(1000L)
+            seconds--
+        }
+    }
+    Column(){
+    Row(horizontalArrangement = Arrangement.SpaceAround) {
+        Text(text = "Temps de repos restant: ",
+            textDecoration = TextDecoration.Underline,
+            color = Yellow2)
+        Box(
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(text = "$seconds",
+                color = Color.White,
+                modifier = Modifier.background(Color.DarkGray)
+                 )
+        }
+    }
+        Button(onClick = { isRunning = !isRunning },
+            colors = ButtonDefaults.buttonColors(containerColor = Yellow2) ){
+            Text(text = if (isRunning) "Pause" else "Resume")
+        }
+}}
