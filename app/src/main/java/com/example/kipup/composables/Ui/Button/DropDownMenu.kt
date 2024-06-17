@@ -34,7 +34,7 @@ import com.example.kipup.ui.theme.BackGround
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDownMenu(
+fun DropDownMenu( //drop down menu permettant de trier les exos selon differents critères
     onValidClick: (String) -> Unit,
 ) {
     val context = LocalContext.current

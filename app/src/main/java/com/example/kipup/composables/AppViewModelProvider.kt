@@ -7,9 +7,9 @@ import com.example.kipup.InventoryApplication
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {
-        // Initializer for ItemEditViewModel
+        // Initializer for ExoEditViewModel
 
-        // Initializer for ItemEntryViewModel
+        // Initializer for ExoEntryViewModel
         initializer {
             ExoEntryViewModel(inventoryApplication().container.exoRepository)
 
